@@ -1,0 +1,89 @@
+/* The property inspector, in the same graphite-and-pink as the keys
+ * (src/render/theme.ts; the values are literal here because the host loads
+ * this page straight off disk). */
+
+:root {
+  --bg: #0b0b0f;
+  --bg2: #16161d;
+  --bg3: #26262f;
+  --text: #f5f3ff;
+  --text-dim: #a1a1aa;
+  --primary: #f472b6;
+}
+
+body {
+  font-family: -apple-system, system-ui, "Segoe UI", sans-serif;
+  font-size: 13px;
+  color: var(--text);
+  margin: 0;
+  padding: 14px 12px 18px;
+  background-image:
+    linear-gradient(rgba(38, 38, 47, 0.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(38, 38, 47, 0.6) 1px, transparent 1px),
+    linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+  background-size: 18px 18px, 18px 18px, 100% 100%;
+}
+
+h3 {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 4px 0 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(244, 114, 182, 0.4);
+}
+
+h3::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 7px;
+  border-left: 2px solid var(--primary);
+  border-top: 2px solid var(--primary);
+  vertical-align: 1px;
+}
+
+.row { display: flex; align-items: center; margin: 9px 0; gap: 9px; }
+.row label {
+  flex: 0 0 74px;
+  text-align: right;
+  color: var(--text-dim);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.row input, .row output {
+  flex: 1;
+  background: rgba(11, 11, 15, 0.75);
+  border: 1px solid rgba(244, 114, 182, 0.45);
+  color: var(--text);
+  border-radius: 5px;
+  padding: 6px 8px;
+  outline: none;
+  font-family: ui-monospace, "DejaVu Sans Mono", monospace;
+  font-size: 12px;
+}
+.row output { border-style: dashed; color: var(--text-dim); white-space: pre-wrap; }
+.row input::placeholder { color: rgba(161, 161, 170, 0.5); }
+.row input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.16);
+}
+
+.hint {
+  color: var(--text-dim);
+  opacity: 0.8;
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 10px 0 0 83px;
+}
+.hint code {
+  font-family: ui-monospace, "DejaVu Sans Mono", monospace;
+  background: rgba(38, 38, 47, 0.8);
+  border-radius: 3px;
+  padding: 1px 4px;
+}

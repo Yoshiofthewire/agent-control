@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="lib/pi.css" />
+  </head>
+  <body>
+    <h3>T3 Code link</h3>
+    <div class="row"><label for="status">Status</label><output id="status">…</output></div>
+    <div class="row"><label for="pair">Pair</label><input id="pair" placeholder="paste the URL from: npx t3 pair" /></div>
+    <div class="row"><label for="server">Server</label><input id="server" placeholder="auto (only for a bare token)" /></div>
+    <p class="hint">
+      Shared by every T3 key. Run <code>npx t3 pair</code> (or Settings → Connections →
+      Create Link in T3 Code) and paste the pairing URL. The token is exchanged once
+      for a 30-day session and cleared from here.
+    </p>
+
+    <div id="promptRow" hidden>
+      <h3>This key</h3>
+      <div class="row"><label for="text">Prompt</label><input id="text" placeholder="Continue." /></div>
+      <p class="hint">Sent as a new user message to the selected thread.</p>
+    </div>
+
+    <script src="lib/pi.js"></script>
+    <script>
+      const status = document.getElementById("status");
+      const pair = document.getElementById("pair");
+      const server = document.getElementById("server");
+      const text = document.getElementById("text");
+      const promptRow = document.getElementById("promptRow");
+      T3PI.onReady(() => {
+        const g = T3PI.global();
+        status.value = g.status || "…";
+        pair.value = g.pair || "";
+        server.value = g.server || "";
+        const isPrompt = T3PI.action() === "com.t3code.controller.thread.say";
+        promptRow.hidden = !isPrompt;
+        if (isPrompt) text.value = T3PI.settings().text || "";
+      });
+      pair.addEventListener("change", () => T3PI.setGlobal({ pair: pair.value.trim() }));
+      server.addEventListener("change", () => T3PI.setGlobal({ server: server.value.trim() }));
+      text.addEventListener("change", () => T3PI.setSettings({ text: text.value }));
+    </script>
+  </body>
+</html>
